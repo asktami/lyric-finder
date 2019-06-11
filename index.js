@@ -230,7 +230,7 @@ function getTrack(track_id, artist_name, track_name, options) {
 
 
 
-function getiTunes(track_id, artist_name, track_name) {
+function getiTunes(track_id, artist_name, track_name, options) {
 const params = {
 		term: artist_name + " " + track_name,
     	limit: 10
