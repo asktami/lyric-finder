@@ -2,8 +2,7 @@
 'use strict';
 
 // for MusixMatch API search, so can search by LYRICS or ARTIST or SONG
-const proxyURL = 'https://cors-anywhere.herokuapp.com/'; 	// to get around CORS error
-const apiKey = '2795af8d7036855a62070800dc64131d'; 
+const apiKey = 'YOUR-API-KEY'; 
 const searchURL = 'https://api.musixmatch.com/ws/1.1/track.search';
 const trackURL = 'https://api.musixmatch.com/ws/1.1/track.lyrics.get';
 
