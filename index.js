@@ -77,8 +77,8 @@ function formatTrackResults(data, track_id, artist_name, track_name) {
     output +=  lyrics ? `<br>Excerpt:<br><em>${lyrics}</em>` : '<br>';
     output += `<br>&copy; ${item.lyrics_copyright}<br>`;
     
-	// output += `<img src="http://tracking.musixmatch.com/t1.0/${item.pixel_tracking_url}" alt="tracking url">`;
-	output += `<script type="text/javascript" src="http://tracking.musixmatch.com/t1.0/${item.script_tracking_url}">`;
+	// output += `<img src="https://tracking.musixmatch.com/t1.0/${item.pixel_tracking_url}" alt="tracking url">`;
+	output += `<script type="text/javascript" src="https://tracking.musixmatch.com/t1.0/${item.script_tracking_url}">`;
     output += `</p>`;
     
 	$(`#${track_id}-lyrics`).html(output);
@@ -164,7 +164,7 @@ function doSearch(searchTerm, options, limit=1) {
   	},
     //tell jQuery to expect JSONP
     dataType: 'jsonp',
-    //the name of the callback functions
+    //the name of the callback function
     jsonpCallback: 'jsonp_callback',
     contentType: 'application/json',
     //work with the response
@@ -205,7 +205,7 @@ function getTrack(track_id, artist_name, track_name, options) {
   	},
     //tell jQuery to expect JSONP
     dataType: 'jsonp',
-    //the name of the callback functions
+    //the name of the callback function
     jsonpCallback: 'jsonp_callback',
     contentType: 'application/json',
     //work with the response
@@ -231,35 +231,46 @@ function getTrack(track_id, artist_name, track_name, options) {
 
 
 function getiTunes(track_id, artist_name, track_name, options) {
-const params = {
-		term: artist_name + " " + track_name,
-    	limit: 10
-  };
-  const queryString = formatQueryParams(params)
-  const url = iTunesURL + '?' + queryString;
+$.ajax({
+    type: 'GET',
+    //tell API what we want and that we want JSON
+    data: {
+        term: artist_name + " " + track_name,
+    	limit: 10,
+        format:'jsonp',
+        callback:'jsonp_callback'
+    },
+    url: iTunesURL,
+    // console.log the constructed url
+    beforeSend: function(jqXHR, settings) {
+    	console.log('iTunesURL = ' + settings.url);
+  	},
+    //tell jQuery to expect JSONP
+    dataType: 'jsonp',
+    //the name of the callback function
+    jsonpCallback: 'jsonp_callback',
+    contentType: 'application/json',
+    //work with the response
+    success: function(data) {
+    		formatTrackResults(data, track_id, artist_name, track_name);
+           },
+    //work with any error
+    error: function(jqXHR, textStatus, errorThrown) {
+       // console.log('jqXHR JSON.stringify = ' + JSON.stringify(jqXHR));
+       // console.log('textStatus =' + textStatus);
+       // console.log('errorThrown =' + errorThrown);
+         
+    $(`#${track_id}-iTunes`).text(`Something went wrong getting Apple Music info: ${err.error}: ${err.message}`).addClass('error-message');
+    },
+    // When AJAX call is complete, will fire upon success OR when error is thrown
+    	complete: function() {
+      //  console.log('getTrack AJAX call completed');
+	}
+	
+  });
+  
 
-  // console.log('iTunesURL = ' + url);
-
-/*
-ALTERNATIVE:
-const url = iTunesURL + `${artist_name}+${track_name}`;
-console.log('iTunesURL = ' + url);
-*/
-
-  fetch(url)
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error(response.statusText);
-    })
-    .then(data => {
-        formatiTunesResults(data, track_id, track_name)
-    })
-    .catch(err => {
-   // console.log('err = ' +  err);
-    	$(`#${track_id}-iTunes`).text(`Something went wrong getting Apple Music info: ${err.error}: ${err.message}`).addClass('error-message');
-    });
+ 
 }
 
 $(function() { 
