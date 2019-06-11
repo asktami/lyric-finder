@@ -160,7 +160,7 @@ function doSearch(searchTerm, options, limit=1) {
     url: searchURL,
     // console.log the constructed url
     beforeSend: function(jqXHR, settings) {
-    	console.log('searchURL = ' + settings.url);
+    	// console.log('searchURL = ' + settings.url);
   	},
     //tell jQuery to expect JSONP
     dataType: 'jsonp',
@@ -214,9 +214,9 @@ function getTrack(track_id, artist_name, track_name, options) {
            },
     //work with any error
     error: function(jqXHR, textStatus, errorThrown) {
-        console.log('jqXHR JSON.stringify = ' + JSON.stringify(jqXHR));
-        console.log('textStatus =' + textStatus);
-        console.log('errorThrown =' + errorThrown);
+       // console.log('jqXHR JSON.stringify = ' + JSON.stringify(jqXHR));
+       // console.log('textStatus =' + textStatus);
+       // console.log('errorThrown =' + errorThrown);
          
         $(`#${track_id}-lyrics`).text(`Something went wrong getting track info: ${textStatus}`).addClass('error-message');
     },
@@ -238,7 +238,7 @@ const params = {
   const queryString = formatQueryParams(params)
   const url = iTunesURL + '?' + queryString;
 
-  console.log('iTunesURL = ' + url);
+  // console.log('iTunesURL = ' + url);
 
 /*
 ALTERNATIVE:
@@ -257,7 +257,7 @@ console.log('iTunesURL = ' + url);
         formatiTunesResults(data, track_id, track_name)
     })
     .catch(err => {
-    console.log('err = ' +  err);
+   // console.log('err = ' +  err);
     	$(`#${track_id}-iTunes`).text(`Something went wrong getting Apple Music info: ${err.error}: ${err.message}`).addClass('error-message');
     });
 }
