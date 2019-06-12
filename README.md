@@ -7,4 +7,4 @@ Search for a song via Artist or Title or Words in the Song (or any combination) 
 
 APIs:
 - MusixMatch (Endpoints: track.search, track.lyrics.get)
-- iTunes API
+- Napster API
