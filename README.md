@@ -3,7 +3,7 @@
 
 Help users find song lyrics and listen to a sample.
 
-Search for a song via Artist or Title or Words in the Song (or any combination) and get lyrics from MusixMatch and sound samples from Apple Music.
+Search for a song via Artist or Title or Words in the Song (or any combination) and get lyrics from MusixMatch and sound samples from Napster.
 
 APIs:
 - MusixMatch (Endpoints: track.search, track.lyrics.get)
