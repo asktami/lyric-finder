@@ -2,7 +2,7 @@
 'use strict';
 
 // for MusixMatch API search, so can search by LYRICS or ARTIST or SONG
-const apiKey = '445d6196c08dc2b7490929f18149d684'; 
+const musixMatchApiKey = '2795af8d7036855a62070800dc64131d'; 
 const searchURL = 'https://api.musixmatch.com/ws/1.1/track.search';
 const trackURL = 'https://api.musixmatch.com/ws/1.1/track.lyrics.get';
 const albumURL = 'https://api.musixmatch.com/ws/1.1/album.get';
@@ -188,7 +188,7 @@ function doSearch(searchTerm, options, limit=1) {
     type: 'GET',
     //tell API what we want and that we want JSON
     data: {
-        apikey: apiKey,
+        apikey: musixMatchApiKey,
         q: searchTerm,
     	page_size: limit,
     	page: 1,
@@ -233,7 +233,7 @@ function getTrack(track_id, artist_name, track_name) {
     type: 'GET',
     //tell API what we want and that we want JSON
     data: {
-        apikey: apiKey,
+        apikey: musixMatchApiKey,
         track_id: track_id,
         format:'jsonp',
         callback:'jsonp_callback'
