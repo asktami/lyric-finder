@@ -183,7 +183,7 @@ function formatNapsterResults(data, track_id, track_name) {
 };
 
 
-function doSearch(searchTerm, options, limit=10) {  
+function doSearch(searchTerm, options, limit=1) {  
   $.ajax({
     type: 'GET',
     //tell API what we want and that we want JSON
