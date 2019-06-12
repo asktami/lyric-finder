@@ -16,7 +16,7 @@ const linkURL = 'https://www.musixmatch.com/lyrics';
 
 // for Napster API for song samples
 const napsterURL = 'https://api.napster.com/v2.2/search';
-const napsterApiKey = 'YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4';
+const napsterApiKey = 'MDJjYmIwM2UtZmU2ZS00MTFjLTk3MWEtNmU5ZWQwN2FjOWQ3';
 
 
 const options = {
