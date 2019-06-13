@@ -1,53 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lyric Finder</title>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Lyric Finder</title>
+		<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
+			rel="stylesheet" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" />
+		<link rel="stylesheet" href="css/gridX.css" />
+		<link rel="stylesheet" href="css/app.css" />
+	</head>
+	<body>
+		<header>
+			<div class="header_content">
+				<h1>Find Song Lyrics</h1>
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+				<form id="js-form">
+					<legend>Find the lyrics for any song - search by artist, song, lyrics or any combination</legend>
 
-    <link rel="stylesheet" href="index.css">
+					<label for="search-term">
+						<input type="text" name="search-term" id="js-search-term" required aria-required="true" placeholder=""/>
+					</label>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div class="container">
-        <h1>Find Song Lyrics</h1>
-       
+					<button id="js-search">Find Lyrics</button>
+				</form>
 
-        <form id="js-form">
+				<p id="js-error-message" class="error-message"></p>
+			</div>
+		</header>
 
-<legend>Get the lyrics for any song - search by artist, song, lyrics or any combination</legend>
+		<main>
+			<section id="results" class="hidden">
+				<ul id="results-list" class="item-list">
+					<h2>Search Results</h2>
+				</ul>
+			</section>
+		</main>
+		<footer>
+			<span class="back-to-top"><img src="https://img.icons8.com/ios/40/000000/search-filled.png" alt="back to top"></span>
+			<span><a href="https://icons8.com/icon/7695/search-filled"
+					title="Search icon at Icons8.com">Icons by Icons8</a>	• Photo by Matt Botsford on Unsplash • Built by	<a href="http://www.asktami.com" target="_blank">Tami Williams</a></span>
+		</footer>
 
-<label for="search-term">
-<input type="text" name="search-term" id="js-search-term" required aria-required="true" placeholder="Artist, Song or Lyrics">
-</label>
-
-<!--
-
-	<br>
-<label for="max-results">Maximum results to return
-	<input type="number" name="max-results" id="js-max-results" min="1" max="25" step="1" value="1" required aria-required="true" >
-</label>
-
--->
-
-    <input type="submit" value="Get Lyrics">
-    <input type="reset" value="Reset" class="js-reset"></p>
-    </form>
-
-        <p id="js-error-message" class="error-message"></p>
-
-        <section id="results" class="hidden">
-          <ul id="results-list" class="item-list">
-          	<h2>Search Results</h2>
-          </ul>
-        </section>
-
-    </div>
-
-    <script src="index.js"></script>
-</body>
+		<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+		<script src="js/app.js"></script>
+	</body>
 </html>
