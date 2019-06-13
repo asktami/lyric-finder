@@ -50,23 +50,14 @@ function formatSearchResults(data) {
 			getTrack(item.track_id, item.artist_name, item.track_name);
 			getNapster(item.track_id, item.artist_name, item.track_name);
 
-			$('#results-list').append(`
-	<li>
-
-	<h3>${item.track_name}</h3>
-	<div class="flex-container">
-		<div>
-		<p>
+			$('#results-list').append(`<li><h3>${item.track_name}</h3>
 			Artist: ${item.artist_name}
 			<br>Album: ${item.album_name}
-		</p>
-		<p id="${track_id}-lyrics" style="white-space: pre-wrap;"></p>
-		<p id="${track_id}-track_excerpt" style="white-space: pre-wrap;"></p>
+			
+		<div class="item">
+			<div id="${track_id}-Lyrics" class="lyrics"></div>
+			<div id="${track_id}-Napster" class="music"></div>
 		</div>
-
-		<div id="${track_id}-Napster"></div>
-
-	</div>
 	</li>`);
 		}
 	}
@@ -77,11 +68,7 @@ function formatTrackResults(data, track_id, artist_name, track_name) {
 	let lyrics = item.lyrics_body;
 	let track = track_name.split(' ').join('-');
 
-	let output = '';
-
-	output += `<p>`;
-
-	output += `<a href="${linkURL}/${artist_name}/${track}" target="_blank">View Lyrics</a> on MusixMatch<br>`;
+	let output = `<a href="${linkURL}/${artist_name}/${track}" target="_blank">View Lyrics</a> on MusixMatch<br>`;
 
 	output += lyrics ? `<br>Excerpt:<br><em>${lyrics}</em>` : '<br>';
 	output += `<br><br>${item.lyrics_copyright}`;
@@ -94,9 +81,7 @@ function formatTrackResults(data, track_id, artist_name, track_name) {
 		item.script_tracking_url
 	}">`;
 
-	output += `</p>`;
-
-	$(`#${track_id}-lyrics`).html(output);
+	$(`#${track_id}-Lyrics`).html(output);
 }
 
 function formatNapsterResults(data, track_id, track_name) {
@@ -141,23 +126,17 @@ function formatNapsterResults(data, track_id, track_name) {
 			tracks[i].albumName !== currentAlbum &&
 			releaseDate !== currentReleaseDate
 		) {
-			html_artwork += `<div data-track-id="${
-				item.id
-			}" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${
-				item.id
-			}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
-
-
-		  <div class="content-name">${item.name}
-		  	<br>artist: ${item.artistName}
-		  	<br>album: ${tracks[i].albumName}
-		  </div>
-
-		  <audio controls="controls">
-			<source src="${tracks[i].previewURL}" type="audio/mpeg">
-		  </audio>
-
-		</div>`;
+		
+			html_artwork += `<div data-track-id="${item.id}" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+					<div class="content-name">${item.name}
+							   <br>by ${item.artistName}
+							   <br>${tracks[i].albumName}
+							   <br>${releaseDate}
+							 </div>
+					 <audio controls="controls">
+							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
+							 </audio>
+					</div>`;
 		}
 
 		// save current track for comparison
@@ -243,7 +222,7 @@ function getTrack(track_id, artist_name, track_name) {
 			//	console.log('textStatus =' + textStatus);
 			//	console.log('errorThrown =' + errorThrown);
 
-			$(`#${track_id}-lyrics`)
+			$(`#${track_id}-Lyrics`)
 				.text(`Something went wrong getting track info: ${textStatus}`)
 				.addClass('.error-message');
 		},
