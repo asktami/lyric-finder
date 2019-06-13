@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flex Experiments</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet"> 
+    
+  <link href="https://fonts.googleapis.com/css?family=Sintony|Source+Sans+Pro:900" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="indexX.css"> 
+    
+    <style>
+
+* {
+  box-sizing: border-box;
+  margin: 20px 0 0 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Sintony', sans-serif;
+  font-size: 16px;
+  background: white;
+}
+
+@media screen  and (min-width: 768px) /* Tablet */ {
+  body {
+    background: lightblue;
+  }
+}
+
+@media screen and (min-width: 980px) /* Desktop */ {
+  body {
+    background: lightyellow;
+  }
+}
+
+
+h1, h2, h3 {
+font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+font-size: 48px;
+}
+h2 {
+font-size: 38px;s
+}
+h3 {
+font-size: 26px;
+}
+
+.container {
+  margin: 0 auto;
+  border: 5px solid pink;
+  text-align: center;
+}
+
+.error-message {
+    color: red;
+}
+
+.item-list {
+  border: 2px solid green;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  border: 2px solid blue;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+@media screen  and (min-width: 768px) /* Tablet */ {
+  .item {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (min-width: 980px) /* Desktop */ {
+  .item {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
+}
+
+
+.lyrics {
+  margin: 10px 10px 0 0;
+  border: 2px solid red;
+  white-space: pre-wrap;
+  text-align: center;
+  }
+  
+.music {
+  margin: 10px 10px 0 0;
+  border: 2px solid red;
+  }
+
+.error-message {
+    color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+
+section {
+	width: 100%;
+}
+
+#results-list {
+	list-style: none;
+}
+
+.album {
+  background-color: black;
+  border: 2px solid purple;
+  margin-top: 10px;
+  position: relative;
+}
+
+.album:first-child {
+				margin-top: 0;
+			}
+			
+.content-name {
+  color: white;
+  font-size: 16px;
+  margin-top: 0;
+  text-align: center;
+}
+
+.cover {
+   width: 300px;
+   height: 300px;
+   background-size: cover;
+   position: relative;
+}
+
+
+.cover audio {
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+  -moz-box-shadow: 2px 2px 4px 0px #006773;
+  -webkit-box-shadow: 2px 2px 4px 0px #006773;
+  box-shadow: 2px 2px 4px 0px #006773;
+  -moz-border-radius: 7px 7px 7px 7px;
+  -webkit-border-radius: 7px 7px 7px 7px;
+  border-radius: 7px 7px 7px 7px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+audio:hover, audio:focus, audio:active {
+  -webkit-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+input[type="submit"], input[type="reset"] {
+  display: block;
+  font-family: 'Sintony', sans-serif;
+  font-size: 16px;
+  padding: 4px 8px;
+  text-decoration: none;
+  background-color: #eaeaea;
+  background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
+  background-image: -moz-linear-gradient(#fafafa, #eaeaea);
+  background-image: -ms-linear-gradient(top, #fafafa, #eaeaea);
+  background-image: -o-linear-gradient(top, #fafafa, #eaeaea);
+  background-image: linear-gradient(#fafafa, #eaeaea);
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  border-bottom-color: #c5c5c5;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  margin: 20px auto;
+  width: 200px;
+  height: 44px;
+}
+
+@media screen  and (min-width: 768px) /* Tablet */ {
+  input[type="submit"], input[type="reset"] {
+    display: inline-block;
+    width: 75px;
+  }
+}
+
+@media screen and (min-width: 980px) /* Desktop */ {
+  input[type="submit"], input[type="reset"] {
+    display: inline-block;
+    width: 75px;
+  }
+}
+
+
+input[type="submit"]:hover, input[type="reset"]:hover {
+  background-color: #dadada;
+  background-image: -webkit-linear-gradient(#eaeaea, #dadada);
+  background-image: -moz-linear-gradient(#eaeaea, #dadada);
+  background-image: -ms-linear-gradient(top, #eaeaea, #dadada);
+  background-image: -o-linear-gradient(top, #eaeaea, #dadada);
+  background-image: linear-gradient(#eaeaea, #dadada);
+  border-color: #ccc #ccc #b5b5b5;
+}
+input[type="submit"]:active, , input[type="reset"]:active {
+  background-color:#dadada;
+  background-image: none;
+  border-color: #b5b5b5;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.25);
+  -moz-box-shadow: inset 0 3px 5px rgba(0,0,0,0.25);
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.25);
+}
+
+#js-search-term, #js-max-results {
+	width: 75%;
+	padding: 20px;
+	border: 1px solid #ddd;
+	font-size: 16px;
+	height: 44px;
+	}
+	
+#js-max-results {
+width: 50px;
+}
+    </style>
+</head>
+<body>
+<div class="container">
+
+<h1>Find Song Lyrics</h1>
+
+
+<form id="js-form">
+
+<legend>Get the lyrics for any song - search by artist, song, lyrics or any combination</legend> 
+
+<label for="search-term">
+<input type="text" name="search-term" id="js-search-term" required aria-required="true" placeholder="Artist, Song or Lyrics">
+</label>
+
+<br>
+<label for="max-results">Maximum results to return
+	<input type="number" name="max-results" id="js-max-results" min="1" max="25" step="1" value="1" required aria-required="true" >
+</label>	
+
+<input type="submit" value="Search">
+<input type="reset" value="Reset">
+</form>
+
+<p id="error-message" class="error-message">Error Message</p>
+
+
+        <section id="results">
+          <ul id="results-list" class="item-list">
+          	<h2>Search Results</h2>
+          	
+          <li><h3>Track Name</h3>
+          Artist: ARTIST
+		  <br>Album: ALBUM
+		  <br><span id=${album_id}-release_date>RELEASE DATE</span>
+	
+			 <div class="item">
+				 <div id="id-track_excerpt" class="lyrics">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mollis est non tortor rhoncus, finibus lacinia sapien rhoncus. Aliquam tincidunt bibendum eros, et dignissim velit. Vestibulum fringilla eget nisl et pharetra. In sed nisi nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rhoncus turpis nec risus vulputate, eu suscipit libero imperdiet. Nullam fringilla leo eu eleifend sodales. Sed ornare convallis tortor, a cursus arcu sollicitudin maximus. Curabitur consequat mattis lorem nec semper. Quisque pretium convallis orci, et efficitur risus mattis a. Aliquam dapibus, velit sit amet bibendum lobortis, nulla lectus aliquam libero, sit amet commodo ligula mauris at diam. Donec sagittis mauris quis neque auctor volutpat. In hac habitasse platea dictumst. Nulla facilisi. Sed eget ante facilisis, faucibus lectus a, eleifend sapien. Donec maximus aliquam ultricies.
+
+Sed ut turpis et urna vestibulum rhoncus a in magna. Aliquam faucibus, enim ut ullamcorper placerat, sem felis lobortis est, nec luctus lectus diam id quam. Vestibulum id erat porta, mollis quam consequat, pharetra lectus. Sed mauris dolor, sodales ut semper et, eleifend id turpis. Donec semper magna et risus lobortis, a congue eros lobortis. Mauris sed rhoncus felis. Phasellus a lacus leo. Sed pretium nisl mattis mollis congue. Sed sagittis cursus finibus. In id eleifend tortor. Sed eget mauris nec velit ultrices faucibus. Vestibulum nec arcu iaculis, dignissim est vel, laoreet enim.
+
+Sed volutpat congue lacus, tincidunt imperdiet elit pretium non. Etiam posuere orci at sem maximus, id consectetur mauris fermentum. Phasellus rhoncus sem quis tortor molestie sodales. Etiam id congue urna. Donec quis leo finibus, semper justo sed, condimentum diam. Quisque egestas vitae tortor a convallis. Maecenas rhoncus consectetur massa, rhoncus maximus tellus vestibulum id.
+
+Praesent eu tellus et diam malesuada rutrum. Vivamus tellus leo, malesuada in efficitur vitae, elementum ac elit. Maecenas nec tempus ligula. Integer id leo ut ante volutpat efficitur id vitae est. Sed imperdiet tortor et nisl vulputate fringilla. Mauris finibus, arcu at sagittis porttitor, massa augue consequat arcu, eu ultricies mi augue sit amet tellus. Suspendisse condimentum leo eu mi commodo fermentum. Phasellus sed felis feugiat mauris viverra condimentum.
+
+Phasellus non pretium ligula. Morbi sapien nisl, aliquet eget risus nec, iaculis volutpat turpis. Cras sed sollicitudin felis, id fermentum diam. Nulla tempor feugiat enim, et molestie diam porttitor interdum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus ullamcorper risus et purus blandit vulputate. Sed non dignissim diam. Suspendisse placerat, purus nec porta feugiat, sem lectus pretium tellus, non accumsan sem elit nec eros. In faucibus nibh eu dui posuere consectetur.</div>
+				 <div id="id-Napster" class="music">
+		
+				   <div class="album">
+					<div class="content-name">NAME
+							   <br>artist: ARTIST
+							   <br>album: ALBUM
+							   <br>RELEASE DATE
+							 </div>
+					<div data-track-id="item.id" style="background-image:url(background-image-3507320__340.jpg)" alt="${item.name} artwork" class="cover">
+							 <audio controls="controls">
+							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
+							 </audio>
+					</div>
+					</div>
+				   <div class="album">
+					<div class="content-name">NAME
+							   <br>artist: ARTIST
+							   <br>album: ALBUM
+							   <br>RELEASE DATE
+							 </div>
+					<div data-track-id="item.id" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+							 <audio controls="controls">
+							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
+							 </audio>
+					</div>
+					</div>
+				   <div class="album">
+					<div class="content-name">NAME
+							   <br>artist: ARTIST
+							   <br>album: ALBUM
+							   <br>RELEASE DATE
+							 </div>
+					<div data-track-id="item.id" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+							 <audio controls="controls">
+							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
+							 </audio>
+					</div>
+					</div>
+				   <div class="album">
+					<div class="content-name">NAME
+							   <br>artist: ARTIST
+							   <br>album: ALBUM
+							   <br>RELEASE DATE
+							 </div>
+					<div data-track-id="item.id" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+							 <audio controls="controls">
+							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
+							 </audio>
+					</div>
+					</div>
+				   <div class="album">
+					<div class="content-name">NAME
+							   <br>artist: ARTIST
+							   <br>album: ALBUM
+							   <br>RELEASE DATE
+							 </div>
+					<div data-track-id="item.id" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+							 <audio controls="controls">
+							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
+							 </audio>
+					</div>
+					</div>
+				 
+				 </div>
+			 </div>
+			 </li>
+          </ul>
+        </section>
+        
+</div>
+    
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="indexX.js"></script>
+</body>
+</html>
