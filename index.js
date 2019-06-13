@@ -1,11 +1,9 @@
-
 'use strict';
 
 // for MusixMatch API search, so can search by LYRICS or ARTIST or SONG
-const musixMatchApiKey = '2795af8d7036855a62070800dc64131d'; 
+const musixMatchApiKey = '2795af8d7036855a62070800dc64131d';
 const searchURL = 'https://api.musixmatch.com/ws/1.1/track.search';
 const trackURL = 'https://api.musixmatch.com/ws/1.1/track.lyrics.get';
-const albumURL = 'https://api.musixmatch.com/ws/1.1/album.get';
 
 // link to MusixMatch artist search results
 // const linkURL = 'https://www.musixmatch.com/search';
@@ -13,137 +11,121 @@ const albumURL = 'https://api.musixmatch.com/ws/1.1/album.get';
 // link to MusixMatch lyrics search results
 const linkURL = 'https://www.musixmatch.com/lyrics';
 
-
 // for Napster API for song samples
 const napsterURL = 'https://api.napster.com/v2.2/search';
 const napsterApiKey = 'MDJjYmIwM2UtZmU2ZS00MTFjLTk3MWEtNmU5ZWQwN2FjOWQ3';
 
-
 const options = {
-  mode: 'no-cors',
-  headers: new Headers({
-    "Access-Control-Allow-Origin": "*"
+	mode: 'no-cors',
+	headers: new Headers({
+		'Access-Control-Allow-Origin': '*'
 	})
 };
 
 function formatQueryParams(params) {
-  const queryItems = Object.keys(params)
-    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-  return queryItems.join('&');
+	const queryItems = Object.keys(params).map(
+		key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+	);
+	return queryItems.join('&');
 }
 
 function formatSearchResults(data) {
-  // if there are previous results, remove them
-  $('#results-list').empty();
-  
-  if(data.message.body.track_list.length === 0 ){
-  
-  	$('#results-list').append(`
+	// if there are previous results, remove them
+	$('#results-list').empty();
+
+	if (data.message.body.track_list.length === 0) {
+		$('#results-list').append(`
 	<li>
 	<h3>No Lyrics Found</h3>
 	</li>`);
-  
-  } else {
- 
-   // iterate through the result array
-  for (let i = 0; i < data.message.body.track_list.length; i++){
-  
-    let item = data.message.body.track_list[i].track;
-    let track_id = item.track_id;
-    let album_id = item.album_id;
-    
-    //	console.log('track_id = ' + track_id);
-    //	console.log('item.track_name = ' + item.track_name);
-    //	console.log('album_id = ' + album_id);
-    
-	getTrack(item.track_id, item.artist_name, item.track_name);
-	getNapster(item.track_id,item.artist_name, item.track_name);
+	} else {
+		// iterate through the result array
+		for (let i = 0; i < data.message.body.track_list.length; i++) {
+			let item = data.message.body.track_list[i].track;
+			let track_id = item.track_id;
 
-    
-	$('#results-list').append(`
+			//	console.log('track_id = ' + track_id);
+			//	console.log('item.track_name = ' + item.track_name);
+
+			getTrack(item.track_id, item.artist_name, item.track_name);
+			getNapster(item.track_id, item.artist_name, item.track_name);
+
+			$('#results-list').append(`
 	<li>
-	
+
 	<h3>${item.track_name}</h3>
 	<div class="flex-container">
 		<div>
 		<p>
 			Artist: ${item.artist_name}
 			<br>Album: ${item.album_name}
-			<br><span id=${album_id}-release_date></span>
 		</p>
 		<p id="${track_id}-lyrics" style="white-space: pre-wrap;"></p>
 		<p id="${track_id}-track_excerpt" style="white-space: pre-wrap;"></p>
 		</div>
-	
+
 		<div id="${track_id}-Napster"></div>
-	
+
 	</div>
 	</li>`);
-    
-    };
-
-  }
-    
-};
+		}
+	}
+}
 
 function formatTrackResults(data, track_id, artist_name, track_name) {
-
 	let item = data.message.body.lyrics;
-    let lyrics = item.lyrics_body;
-    let track = track_name.split(' ').join('-');
-    
-    let output = '';
-    
-    output += `<p>`;
-    
-    output += `<a href="${linkURL}/${artist_name}/${track}" target="_blank">View Lyrics</a> on MusixMatch<br>`;
-    
-    output +=  lyrics ? `<br>Excerpt:<br><em>${lyrics}</em>` : '<br>';
-    output += `<br><br>${item.lyrics_copyright}`;
-    
-    
-    // output += (item.pixel_tracking_url !== undefined) ? `<img src="https://tracking.musixmatch.com/t1.0/${item.pixel_tracking_url}">` : `<script type="text/javascript" src="https://tracking.musixmatch.com/t1.0/${item.script_tracking_url}">`;
-    
+	let lyrics = item.lyrics_body;
+	let track = track_name.split(' ').join('-');
+
+	let output = '';
+
+	output += `<p>`;
+
+	output += `<a href="${linkURL}/${artist_name}/${track}" target="_blank">View Lyrics</a> on MusixMatch<br>`;
+
+	output += lyrics ? `<br>Excerpt:<br><em>${lyrics}</em>` : '<br>';
+	output += `<br><br>${item.lyrics_copyright}`;
+
+	// output += (item.pixel_tracking_url !== undefined) ? `<img src="https://tracking.musixmatch.com/t1.0/${item.pixel_tracking_url}">` : `<script type="text/javascript" src="https://tracking.musixmatch.com/t1.0/${item.script_tracking_url}">`;
+
 	// output += `<img src="https://tracking.musixmatch.com/t1.0/${item.pixel_tracking_url}" alt="tracking url">`;
-	
-	output += `<script type="text/javascript" src="https://tracking.musixmatch.com/t1.0/${item.script_tracking_url}">`;
-	
-    output += `</p>`;
-    
+
+	output += `<script type="text/javascript" src="https://tracking.musixmatch.com/t1.0/${
+		item.script_tracking_url
+	}">`;
+
+	output += `</p>`;
+
 	$(`#${track_id}-lyrics`).html(output);
-	
-	
-};
+}
 
 function formatNapsterResults(data, track_id, track_name) {
-
 	let html_artwork = '';
 	let currentTrack = '';
 	let currentAlbum = '';
 	let currentReleaseDate = '';
-	
+
 	let albums = data.search.data.albums;
 	let tracks = data.search.data.tracks;
-	
+
 	// console.log('*** item = ' + data.search.data.albums[0].name);
-	
-    for (let i = 0; i < albums.length; i++){
-    
+
+	for (let i = 0; i < albums.length; i++) {
 		let item = albums[i];
-		
+
 		// console.log('*** item = ' + JSON.stringify(item));
-		
-		let releaseDateTemp = item.originallyReleased.substring(0,10);
-		
-		let releaseDateParts = releaseDateTemp.split("-");
-		
+
+		let releaseDateTemp = item.originallyReleased.substring(0, 10);
+
+		let releaseDateParts = releaseDateTemp.split('-');
+
 		let releaseDateArr = [];
 		releaseDateArr.push(releaseDateParts[1]);
 		releaseDateArr.push(releaseDateParts[2]);
 		releaseDateArr.push(releaseDateParts[0]);
-		
-		let releaseDate = releaseDateArr.join("/");
-		
+
+		let releaseDate = releaseDateArr.join('/');
+
 		// omit duplicate tracks from list
 		/*
 		console.log('item.name = ' + item.name );
@@ -154,193 +136,195 @@ function formatNapsterResults(data, track_id, track_name) {
 		console.log('releaseDate = ' + releaseDate );
 		console.log('currentReleaseDate = ' + currentReleaseDate );
 		*/
-    	if(item.name.toLowerCase().includes(track_name.toLowerCase()) && tracks[i].albumName !== currentAlbum && releaseDate !== currentReleaseDate){
-    	
-		html_artwork += `<div data-track-id="${item.id}" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
-		
-		
+		if (
+			item.name.toLowerCase().includes(track_name.toLowerCase()) &&
+			tracks[i].albumName !== currentAlbum &&
+			releaseDate !== currentReleaseDate
+		) {
+			html_artwork += `<div data-track-id="${
+				item.id
+			}" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${
+				item.id
+			}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+
+
 		  <div class="content-name">${item.name}
 		  	<br>artist: ${item.artistName}
 		  	<br>album: ${tracks[i].albumName}
 		  </div>
-  
+
 		  <audio controls="controls">
 			<source src="${tracks[i].previewURL}" type="audio/mpeg">
 		  </audio>
-  
-		</div>`;	
-		
+
+		</div>`;
 		}
-    	
-    	// save current track for comparison
-    	currentTrack = item.name;
+
+		// save current track for comparison
+		currentTrack = item.name;
 		currentAlbum = tracks[i].albumName;
 		currentReleaseDate = releaseDate;
-    }
-    
-   $(`#${track_id}-Napster`).html(html_artwork);
-		
-};
-
-
-function doSearch(searchTerm, options, limit=1) {  
-  $.ajax({
-    type: 'GET',
-    //tell API what we want and that we want JSON
-    data: {
-        apikey: musixMatchApiKey,
-        q: searchTerm,
-    	page_size: limit,
-    	page: 1,
-    	s_track_rating: 'desc',
-        format:'jsonp',
-        callback:'jsonp_callback'
-    },
-    url: searchURL,
-    // console.log the constructed url
-    beforeSend: function(jqXHR, settings) {
-    	//	console.log('searchURL = ' + settings.url);
-  	},
-    //tell jQuery to expect JSONP
-    dataType: 'jsonp',
-    //the name of the callback functions
-    jsonpCallback: 'jsonp_callback',
-    contentType: 'application/json',
-    //work with the response
-    success: function(data) {
-    		formatSearchResults(data);
-           },
-    //work with any error
-    error: function(jqXHR, textStatus, errorThrown) {
-        //	console.log('jqXHR JSON.stringify = ' + JSON.stringify(jqXHR));
-        //	console.log('textStatus =' + textStatus);
-        //	console.log('errorThrown =' + errorThrown);
-        
-        $('#js-error-message').text(`Something went wrong doing this search: ${textStatus}`).addClass('.error-message');
-
-    },
-    // When AJAX call is complete, will fire upon success OR when error is thrown
-    	complete: function() {
-        //	console.log('doSearch AJAX call completed');
 	}
-	
-  });
-  
+
+	$(`#${track_id}-Napster`).html(html_artwork);
 }
 
-function getTrack(track_id, artist_name, track_name) {  
-  $.ajax({
-    type: 'GET',
-    //tell API what we want and that we want JSON
-    data: {
-        apikey: musixMatchApiKey,
-        track_id: track_id,
-        format:'jsonp',
-        callback:'jsonp_callback'
-    },
-    url: trackURL,
-    // console.log the constructed url
-    beforeSend: function(jqXHR, settings) {
-    	//	console.log('trackURL = ' + settings.url);
-  	},
-    //tell jQuery to expect JSONP
-    dataType: 'jsonp',
-    //the name of the callback functions
-    jsonpCallback: 'jsonp_callback',
-    contentType: 'application/json',
-    //work with the response
-    success: function(data) {
-    		formatTrackResults(data, track_id, artist_name, track_name);
-           },
-    //work with any error
-    error: function(jqXHR, textStatus, errorThrown) {
-        //	console.log('jqXHR JSON.stringify = ' + JSON.stringify(jqXHR));
-        //	console.log('textStatus =' + textStatus);
-        //	console.log('errorThrown =' + errorThrown);
-        
-        $(`#${track_id}-lyrics`).text(`Something went wrong getting track info: ${textStatus}`).addClass('.error-message');
-    },
-    // When AJAX call is complete, will fire upon success OR when error is thrown
-    	complete: function() {
-        //	console.log('getTrack AJAX call completed');
-	}
-	
-  });
+function doSearch(searchTerm, options, limit = 1) {
+	$.ajax({
+		type: 'GET',
+		//tell API what we want and that we want JSON
+		data: {
+			apikey: musixMatchApiKey,
+			q: searchTerm,
+			page_size: limit,
+			page: 1,
+			s_track_rating: 'desc',
+			format: 'jsonp',
+			callback: 'jsonp_callback'
+		},
+		url: searchURL,
+		// console.log the constructed url
+		beforeSend: function(jqXHR, settings) {
+			//	console.log('searchURL = ' + settings.url);
+		},
+		//tell jQuery to expect JSONP
+		dataType: 'jsonp',
+		//the name of the callback functions
+		jsonpCallback: 'jsonp_callback',
+		contentType: 'application/json',
+		//work with the response
+		success: function(data) {
+			formatSearchResults(data);
+		},
+		//work with any error
+		error: function(jqXHR, textStatus, errorThrown) {
+			//	console.log('jqXHR JSON.stringify = ' + JSON.stringify(jqXHR));
+			//	console.log('textStatus =' + textStatus);
+			//	console.log('errorThrown =' + errorThrown);
+
+			$('#js-error-message')
+				.text(`Something went wrong doing this search: ${textStatus}`)
+				.addClass('.error-message');
+		},
+		// When AJAX call is complete, will fire upon success OR when error is thrown
+		complete: function() {
+			//	console.log('doSearch AJAX call completed');
+		}
+	});
 }
 
+function getTrack(track_id, artist_name, track_name) {
+	$.ajax({
+		type: 'GET',
+		//tell API what we want and that we want JSON
+		data: {
+			apikey: musixMatchApiKey,
+			track_id: track_id,
+			format: 'jsonp',
+			callback: 'jsonp_callback'
+		},
+		url: trackURL,
+		// console.log the constructed url
+		beforeSend: function(jqXHR, settings) {
+			//	console.log('trackURL = ' + settings.url);
+		},
+		//tell jQuery to expect JSONP
+		dataType: 'jsonp',
+		//the name of the callback functions
+		jsonpCallback: 'jsonp_callback',
+		contentType: 'application/json',
+		//work with the response
+		success: function(data) {
+			formatTrackResults(data, track_id, artist_name, track_name);
+		},
+		//work with any error
+		error: function(jqXHR, textStatus, errorThrown) {
+			//	console.log('jqXHR JSON.stringify = ' + JSON.stringify(jqXHR));
+			//	console.log('textStatus =' + textStatus);
+			//	console.log('errorThrown =' + errorThrown);
+
+			$(`#${track_id}-lyrics`)
+				.text(`Something went wrong getting track info: ${textStatus}`)
+				.addClass('.error-message');
+		},
+		// When AJAX call is complete, will fire upon success OR when error is thrown
+		complete: function() {
+			//	console.log('getTrack AJAX call completed');
+		}
+	});
+}
 
 function getNapster(track_id, artist_name, track_name) {
-
-const params = {
+	const params = {
 		apikey: napsterApiKey,
-		query: artist_name + " " + track_name,
-    	limit: 10
-  };
-  const queryString = formatQueryParams(params);
-  const url = napsterURL + '?' + queryString;
+		query: artist_name + ' ' + track_name,
+		limit: 10
+	};
+	const queryString = formatQueryParams(params);
+	const url = napsterURL + '?' + queryString;
 
-  //	console.log('napsterURL = ' + url);
+	//	console.log('napsterURL = ' + url);
 
-/*
+	/*
 ALTERNATIVE:
 const napsterURL = 'https://api.napster.com/v2.2/search';
 const url = napsterURL + `${artist_name}+${track_name}&limit=10`;
 console.log('napsterURL = ' + url);
 */
 
-
 	fetch(url)
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      response.json().then(err => {
-      	throw new Error(err); 
-      })
-    })
-    .then(data => formatNapsterResults(data, track_id, track_name))
-    .catch(err => {
-    	$(`#${track_id}-Napster`).text(`Something went wrong getting Napster info: ${err.error}: ${err.message}`).addClass('.error-message');
-    });
-    
-    
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			}
+			response.json().then(err => {
+				throw new Error(err);
+			});
+		})
+		.then(data => formatNapsterResults(data, track_id, track_name))
+		.catch(err => {
+			$(`#${track_id}-Napster`)
+				.text(
+					`Something went wrong getting Napster info: ${err.error}: ${
+						err.message
+					}`
+				)
+				.addClass('.error-message');
+		});
 }
 
+$(function() {
+	$(document).on('click', '.js-reset', function(event) {
+		// clear errors
+		$('#js-error-message').empty();
 
-$(function() { 
-     $(document).on('click', '.js-reset', function(event){
-     
-     
-	 // clear errors
-	 $('#js-error-message').empty();
-	 
-	 // clear results list
-	 $('#results-list').empty();
-	 
-	 //hide the results section  
-	 $('#results').addClass('hidden');
+		// clear results list
+		$('#results-list').empty();
 
-	 // focus on searchTerm
-	 $('.js-search-term').focus();
+		//hide the results section
+		$('#results').addClass('hidden');
 
-    });
-})
-
+		// focus on searchTerm
+		$('.js-search-term').focus();
+	});
+});
 
 function watchForm() {
-  $('form').submit(event => {
-    event.preventDefault();
-    $('#results-list').empty();
-    $('#results-list').html('<div id="loader"><img src="loader.gif" alt="loading..."></div>');
-  $('#results').removeClass('hidden');
-     
-    const searchTerm = $('#js-search-term').val();
-    const limit = $('#js-max-results').val();
-    
-    //	console.log('limit = ' + limit);
-    
-    doSearch(searchTerm, options, limit);
-  });
+	$('form').submit(event => {
+		event.preventDefault();
+		$('#results-list').empty();
+		$('#results-list').html(
+			'<div id="loader"><img src="loader.gif" alt="loading..."></div>'
+		);
+		$('#results').removeClass('hidden');
+
+		const searchTerm = $('#js-search-term').val();
+		const limit = $('#js-max-results').val();
+
+		//	console.log('limit = ' + limit);
+
+		doSearch(searchTerm, options, limit);
+	});
 }
 
 $(watchForm);
