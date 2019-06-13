@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="indexX.css">
 
     <style>
-
 * {
   box-sizing: border-box;
   margin: 20px 0 0 0;
@@ -55,7 +54,7 @@ font-size: 26px;
 
 .container {
   margin: 0 auto;
-  border: 5px solid pink;
+  /* border: 5px solid pink; */
   text-align: center;
 }
 
@@ -64,7 +63,7 @@ font-size: 26px;
 }
 
 .item-list {
-  border: 2px solid green;
+  /* border: 2px solid green; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,13 +71,12 @@ font-size: 26px;
 }
 
 .item {
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
-  text-align: left;
 }
 
 @media screen  and (min-width: 768px) /* Tablet */ {
@@ -97,15 +95,15 @@ font-size: 26px;
 
 
 .lyrics {
-  margin: 10px 10px 0 0;
-  border: 2px solid red;
+  margin: 10px 10px 0 10px;
+  /* border: 2px solid red; */
   white-space: pre-wrap;
-  text-align: center;
+  text-align: left;
   }
 
 .music {
   margin: 10px 10px 0 0;
-  border: 2px solid red;
+  /* border: 2px solid red; */
   }
 
 .error-message {
@@ -125,43 +123,34 @@ section {
 	list-style: none;
 }
 
-.album {
-  background-color: black;
-  border: 2px solid purple;
-  margin-top: 10px;
-  position: relative;
-}
-
-.album:first-child {
-				margin-top: 0;
-			}
-
 .content-name {
-  color: white;
+  color: #f1f1f1;
   font-size: 16px;
-  margin-top: 0;
   text-align: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  padding: 5px 0;
+  margin-top: 0;
 }
 
 .cover {
+  /* border: 2px solid purple; */
    width: 300px;
    height: 300px;
    background-size: cover;
    position: relative;
+   text-align: left;
+   margin-top: 10px;
 }
 
+.cover:first-child {
+	margin-top: 0;
+}
 
 .cover audio {
-  -webkit-transition: all 0.5s linear;
-  -moz-transition: all 0.5s linear;
-  -o-transition: all 0.5s linear;
-  transition: all 0.5s linear;
-  -moz-box-shadow: 2px 2px 4px 0px #006773;
-  -webkit-box-shadow: 2px 2px 4px 0px #006773;
-  box-shadow: 2px 2px 4px 0px #006773;
-  -moz-border-radius: 7px 7px 7px 7px;
-  -webkit-border-radius: 7px 7px 7px 7px;
-  border-radius: 7px 7px 7px 7px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -199,17 +188,17 @@ input[type="submit"], input[type="reset"] {
   height: 44px;
 }
 
-@media screen  and (min-width: 768px) /* Tablet */ {
+@media screen  and (min-width: 768px) /* Tablet & iPad Pro */ {
   input[type="submit"], input[type="reset"] {
-    display: inline-block;
-    width: 75px;
+    display: block;
+    width: 150px;
   }
 }
 
-@media screen and (min-width: 980px) /* Desktop */ {
+@media screen and (min-width: 1025px) /* Desktop */ {
   input[type="submit"], input[type="reset"] {
     display: inline-block;
-    width: 75px;
+    width: 150px;
   }
 }
 
@@ -233,7 +222,7 @@ input[type="submit"]:active, , input[type="reset"]:active {
 }
 
 #js-search-term, #js-max-results {
-	width: 75%;
+	width: 50%;
 	padding: 20px;
 	border: 1px solid #ddd;
 	font-size: 16px;
@@ -278,10 +267,10 @@ width: 50px;
           <li><h3>Track Name</h3>
           Artist: ARTIST
 		  <br>Album: ALBUM
-		  <br><span id=${album_id}-release_date>RELEASE DATE</span>
 
 			 <div class="item">
-				 <div id="id-track_excerpt" class="lyrics">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mollis est non tortor rhoncus, finibus lacinia sapien rhoncus. Aliquam tincidunt bibendum eros, et dignissim velit. Vestibulum fringilla eget nisl et pharetra. In sed nisi nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rhoncus turpis nec risus vulputate, eu suscipit libero imperdiet. Nullam fringilla leo eu eleifend sodales. Sed ornare convallis tortor, a cursus arcu sollicitudin maximus. Curabitur consequat mattis lorem nec semper. Quisque pretium convallis orci, et efficitur risus mattis a. Aliquam dapibus, velit sit amet bibendum lobortis, nulla lectus aliquam libero, sit amet commodo ligula mauris at diam. Donec sagittis mauris quis neque auctor volutpat. In hac habitasse platea dictumst. Nulla facilisi. Sed eget ante facilisis, faucibus lectus a, eleifend sapien. Donec maximus aliquam ultricies.
+				 <div id="id-Lyrics" class="lyrics">
+				 <a href="${linkURL}/${artist_name}/${track}" target="_blank">View Lyrics</a> on MusixMatch<br><br>Excerpt:<br><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mollis est non tortor rhoncus, finibus lacinia sapien rhoncus. Aliquam tincidunt bibendum eros, et dignissim velit. Vestibulum fringilla eget nisl et pharetra. In sed nisi nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rhoncus turpis nec risus vulputate, eu suscipit libero imperdiet. Nullam fringilla leo eu eleifend sodales. Sed ornare convallis tortor, a cursus arcu sollicitudin maximus. Curabitur consequat mattis lorem nec semper. Quisque pretium convallis orci, et efficitur risus mattis a. Aliquam dapibus, velit sit amet bibendum lobortis, nulla lectus aliquam libero, sit amet commodo ligula mauris at diam. Donec sagittis mauris quis neque auctor volutpat. In hac habitasse platea dictumst. Nulla facilisi. Sed eget ante facilisis, faucibus lectus a, eleifend sapien. Donec maximus aliquam ultricies.
 
 Sed ut turpis et urna vestibulum rhoncus a in magna. Aliquam faucibus, enim ut ullamcorper placerat, sem felis lobortis est, nec luctus lectus diam id quam. Vestibulum id erat porta, mollis quam consequat, pharetra lectus. Sed mauris dolor, sodales ut semper et, eleifend id turpis. Donec semper magna et risus lobortis, a congue eros lobortis. Mauris sed rhoncus felis. Phasellus a lacus leo. Sed pretium nisl mattis mollis congue. Sed sagittis cursus finibus. In id eleifend tortor. Sed eget mauris nec velit ultrices faucibus. Vestibulum nec arcu iaculis, dignissim est vel, laoreet enim.
 
@@ -289,69 +278,87 @@ Sed volutpat congue lacus, tincidunt imperdiet elit pretium non. Etiam posuere o
 
 Praesent eu tellus et diam malesuada rutrum. Vivamus tellus leo, malesuada in efficitur vitae, elementum ac elit. Maecenas nec tempus ligula. Integer id leo ut ante volutpat efficitur id vitae est. Sed imperdiet tortor et nisl vulputate fringilla. Mauris finibus, arcu at sagittis porttitor, massa augue consequat arcu, eu ultricies mi augue sit amet tellus. Suspendisse condimentum leo eu mi commodo fermentum. Phasellus sed felis feugiat mauris viverra condimentum.
 
-Phasellus non pretium ligula. Morbi sapien nisl, aliquet eget risus nec, iaculis volutpat turpis. Cras sed sollicitudin felis, id fermentum diam. Nulla tempor feugiat enim, et molestie diam porttitor interdum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus ullamcorper risus et purus blandit vulputate. Sed non dignissim diam. Suspendisse placerat, purus nec porta feugiat, sem lectus pretium tellus, non accumsan sem elit nec eros. In faucibus nibh eu dui posuere consectetur.</div>
+Phasellus non pretium ligula. Morbi sapien nisl, aliquet eget risus nec, iaculis volutpat turpis. Cras sed sollicitudin felis, id fermentum diam. Nulla tempor feugiat enim, et molestie diam porttitor interdum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus ullamcorper risus et purus blandit vulputate. Sed non dignissim diam. Suspendisse placerat, purus nec porta feugiat, sem lectus pretium tellus, non accumsan sem elit nec eros. In faucibus nibh eu dui posuere consectetur.</em>
+<br><br>Copyright...
+</div>
 				 <div id="id-Napster" class="music">
-
-				   <div class="album">
-					<div class="content-name">NAME
-							   <br>artist: ARTIST
-							   <br>album: ALBUM
-							   <br>RELEASE DATE
-							 </div>
+					
 					<div data-track-id="item.id" style="background-image:url(background-image-3507320__340.jpg)" alt="${item.name} artwork" class="cover">
-							 <audio controls="controls">
-							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
-							 </audio>
-					</div>
-					</div>
-				   <div class="album">
-					<div class="content-name">NAME
-							   <br>artist: ARTIST
-							   <br>album: ALBUM
+							<div class="content-name">NAME
+							   <br>by ARTIST
+							   <br>ALBUM
 							   <br>RELEASE DATE
 							 </div>
-					<div data-track-id="item.id" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+							 
 							 <audio controls="controls">
 							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
 							 </audio>
 					</div>
-					</div>
-				   <div class="album">
-					<div class="content-name">NAME
-							   <br>artist: ARTIST
-							   <br>album: ALBUM
+					
+				   
+				   <div data-track-id="item.id" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+							<div class="content-name">NAME
+							   <br>by ARTIST
+							   <br>ALBUM
 							   <br>RELEASE DATE
 							 </div>
-					<div data-track-id="item.id" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+							 
 							 <audio controls="controls">
 							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
 							 </audio>
 					</div>
-					</div>
-				   <div class="album">
-					<div class="content-name">NAME
-							   <br>artist: ARTIST
-							   <br>album: ALBUM
+					
+					<div data-track-id="item.id" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+							<div class="content-name">NAME
+							   <br>by ARTIST
+							   <br>ALBUM
 							   <br>RELEASE DATE
 							 </div>
-					<div data-track-id="item.id" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+							 
 							 <audio controls="controls">
 							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
 							 </audio>
 					</div>
-					</div>
-				   <div class="album">
-					<div class="content-name">NAME
-							   <br>artist: ARTIST
-							   <br>album: ALBUM
+
+
+<div data-track-id="item.id" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+							<div class="content-name">NAME
+							   <br>by ARTIST
+							   <br>ALBUM
 							   <br>RELEASE DATE
 							 </div>
-					<div data-track-id="item.id" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+							 
 							 <audio controls="controls">
 							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
 							 </audio>
 					</div>
+
+
+<div data-track-id="item.id" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+							<div class="content-name">NAME
+							   <br>by ARTIST
+							   <br>ALBUM
+							   <br>RELEASE DATE
+							 </div>
+							 
+							 <audio controls="controls">
+							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
+							 </audio>
 					</div>
+
+
+<div data-track-id="item.id" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${item.id}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
+							<div class="content-name">NAME
+							   <br>by ARTIST
+							   <br>ALBUM
+							   <br>RELEASE DATE
+							 </div>
+							 
+							 <audio controls="controls">
+							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
+							 </audio>
+					</div>
+
 
 				 </div>
 			 </div>
