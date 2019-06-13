@@ -15,16 +15,22 @@
 <body>
     <div class="container">
         <h1>Find Song Lyrics</h1>
-        <p>Get the lyrics for any song - search by artist, song, lyrics or any combination</p>
+       
 
         <form id="js-form">
-            <label for="search-term"></label>
-            <input type="text" name="search-term" id="js-search-term" required aria-required="true" placeholder="enter artist, song or lyrics">
+
+<legend>Get the lyrics for any song - search by artist, song, lyrics or any combination</legend>
+
+<label for="search-term">
+<input type="text" name="search-term" id="js-search-term" required aria-required="true" placeholder="Artist, Song or Lyrics">
+</label>
 
 <!--
 
-	<p><label for="max-results">Maximum results to return</label>
+	<br>
+<label for="max-results">Maximum results to return
 	<input type="number" name="max-results" id="js-max-results" min="1" max="25" step="1" value="1" required aria-required="true" >
+</label>
 
 -->
 
@@ -35,8 +41,9 @@
         <p id="js-error-message" class="error-message"></p>
 
         <section id="results" class="hidden">
-          <h2>Search Results</h2>
-          <ul id="results-list"></ul>
+          <ul id="results-list" class="item-list">
+          	<h2>Search Results</h2>
+          </ul>
         </section>
 
     </div>
