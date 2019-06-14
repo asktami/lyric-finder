@@ -3,18 +3,18 @@
   "short_name": "Lyrics",
   "icons": [
     {
-      "src": "app-images/icon-72x72.png",
-      "sizes": "72x72",
+      "src": "app-images/icon-72x52.png",
+      "sizes": "72x52",
       "type": "image/png"
     },
     {
-      "src": "app-images/icon-96x96.png",
-      "sizes": "96x96",
+      "src": "app-images/icon-96x69.png",
+      "sizes": "96x69",
       "type": "image/png"
     },
     {
-      "src": "app-images/icon-128x128.png",
-      "sizes": "128x128",
+      "src": "app-images/icon-128x92.png",
+      "sizes": "128x92",
       "type": "image/png"
     },
     {
@@ -23,18 +23,18 @@
       "type": "image/png"
     },
     {
-      "src": "app-images/icon-152x152.png",
-      "sizes": "152x152",
+      "src": "app-images/icon-152x109.png",
+      "sizes": "152x109",
       "type": "image/png"
     },
     {
-      "src": "app-images/icon-192x192.png",
-      "sizes": "192x192",
+      "src": "app-images/icon-192x138.png",
+      "sizes": "192x138",
       "type": "image/png"
     },
     {
-      "src": "app-images/icon-384x384.png",
-      "sizes": "384x384",
+      "src": "app-images/icon-384x277.png",
+      "sizes": "384x277",
       "type": "image/png"
     },
     {
