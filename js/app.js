@@ -154,7 +154,7 @@ function formatNapsterResults(data, track_id, track_name) {
 	$(`#${track_id}-Napster`).html(html_artwork);
 }
 
-function doSearch(searchTerm, options, limit =1) {
+function doSearch(searchTerm, options, limit=2) {
 	$.ajax({
 		type: 'GET',
 		//tell API what we want and that we want JSON
