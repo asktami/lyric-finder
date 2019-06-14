@@ -1,5 +1,6 @@
 {
   "name": "Lyric Finder",
+  "short_name": "Lyrics",
   "icons": [
     {
       "src": "app-images/icon-72x72.png",
@@ -17,8 +18,8 @@
       "type": "image/png"
     },
     {
-      "src": "app-images/icon-144x144.png",
-      "sizes": "144x144",
+      "src": "app-images/icon-144x104.png",
+      "sizes": "144x104",
       "type": "image/png"
     },
     {
@@ -44,6 +45,7 @@
   ],
   "start_url": "https://asktami.github.io/lyric-finder-api-capstone/",
   "background_color": "#000",
+  "theme-color": "#000",
   "display": "standalone",
   "scope": "/",
   "default_locale": "en",
