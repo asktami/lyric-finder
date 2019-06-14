@@ -45,7 +45,7 @@
   ],
   "start_url": "https://asktami.github.io/lyric-finder-api-capstone/",
   "background_color": "#000",
-  "theme-color": "#000",
+  "theme_color": "#000",
   "display": "standalone",
   "scope": "/",
   "default_locale": "en",
