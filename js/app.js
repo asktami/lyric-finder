@@ -44,9 +44,6 @@ function formatSearchResults(data) {
 			let item = data.message.body.track_list[i].track;
 			let track_id = item.track_id;
 
-			//	console.log('track_id = ' + track_id);
-			//	console.log('item.track_name = ' + item.track_name);
-
 			getTrack(item.track_id, item.artist_name, item.track_name);
 			getNapster(item.track_id, item.artist_name, item.track_name);
 
@@ -66,9 +63,15 @@ function formatSearchResults(data) {
 function formatTrackResults(data, track_id, artist_name, track_name) {
 	let item = data.message.body.lyrics;
 	let lyrics = item.lyrics_body;
-	let track = track_name.split(' ').join('-');
+	
+	// remove all parenthesis = .replace(/[()]/g,"")
+	// and replace all non-alphanumeric characters with dashes
+	// console.log('track = ' + track_name);
+	let track = track_name.trim().replace(/[()]/g,"").replace(/\W+/g, "-");
+	let artist = artist_name.trim().replace(/[()]/g,"").replace(/\W+/g, "-");
+	//artist_name.split(' ').join('-');
 
-	let output = `<a href="${linkURL}/${artist_name}/${track}" target="_blank">View Lyrics</a> on MusixMatch<br>`;
+	let output = `<a href="${linkURL}/${artist}/${track}" target="_blank">View Lyrics</a> on MusixMatch<br>`;
 
 	output += lyrics ? `<br>Excerpt:<br><em>${lyrics}</em>` : '<br>';
 	output += `<br><br>${item.lyrics_copyright}`;
@@ -88,70 +91,70 @@ function formatNapsterResults(data, track_id, track_name) {
 	let html_artwork = '';
 	let currentTrack = '';
 	let currentAlbum = '';
+	let releaseDate = '';
 	let currentReleaseDate = '';
 
 	let albums = data.search.data.albums;
 	let tracks = data.search.data.tracks;
 
-	// console.log('*** item = ' + data.search.data.albums[0].name);
+	// console.log('*** album = ' + data.search.data.albums[0].name);
+	// console.log('*** track = ' + data.search.data.track[0].name);
 
-	for (let i = 0; i < albums.length; i++) {
-		let item = albums[i];
+	for (let i = 0; i < tracks.length; i++) {
+		let track = tracks[i];
+		let album = albums[i];
 
-		// console.log('*** item = ' + JSON.stringify(item));
 
-		let releaseDateTemp = item.originallyReleased.substring(0, 10);
+		if(album !== undefined){
+		   let releaseDateTemp = album.originallyReleased.substring(0, 10);
 
-		let releaseDateParts = releaseDateTemp.split('-');
+		   let releaseDateParts = releaseDateTemp.split('-');
 
-		let releaseDateArr = [];
-		releaseDateArr.push(releaseDateParts[1]);
-		releaseDateArr.push(releaseDateParts[2]);
-		releaseDateArr.push(releaseDateParts[0]);
+		   let releaseDateArr = [];
+		   releaseDateArr.push(releaseDateParts[1]);
+		   releaseDateArr.push(releaseDateParts[2]);
+		   releaseDateArr.push(releaseDateParts[0]);
 
-		let releaseDate = releaseDateArr.join('/');
-
+		   releaseDate = releaseDateArr.join('/');
+		}
+		
 		// omit duplicate tracks from list
 		/*
-		console.log('item.name = ' + item.name );
-		console.log('track_name = ' + track_name );
+		console.log('track.albumName = ' + track.albumName );
+		console.log('track name = ' + track.name );
+		console.log('artist name = ' + track.artistName );
 		console.log('currentTrack = ' + currentTrack );
 		console.log('currentAlbum = ' + currentAlbum );
-		console.log('tracks[i].albumName = ' + tracks[i].albumName );
 		console.log('releaseDate = ' + releaseDate );
 		console.log('currentReleaseDate = ' + currentReleaseDate );
-		*/
+		 */
+		 
 		if (
-			item.name.toLowerCase().includes(track_name.toLowerCase()) &&
-			tracks[i].albumName !== currentAlbum &&
-			releaseDate !== currentReleaseDate
+			track.name.toLowerCase().includes(currentTrack.toLowerCase()) &&
+			track.albumName !== currentAlbum 
 		) {
-			html_artwork += `<div data-track-id="${
-				item.id
-			}" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${
-				item.id
-			}/images/300x300.jpg)" alt="${item.name} artwork" class="cover">
-					<div class="content-name">${item.name}
-							   <br>by ${item.artistName}
-							   <br>${tracks[i].albumName}
+			html_artwork += `<div data-track-id="${track.id}" style="background-image:url(https://api.napster.com/imageserver/v2/albums/${track.albumId}/images/300x300.jpg)" alt="${track.name} artwork" class="cover">
+					<div class="content-name">${track.name}
+							   <br>by ${track.artistName}
+							   <br>${track.albumName}
 							   <br>${releaseDate}
 							 </div>
 					 <audio controls="controls">
-							   <source src="${tracks[i].previewURL}" type="audio/mpeg">
+							   <source src="${track.previewURL}" type="audio/mpeg">
 							 </audio>
 					</div>`;
 		}
 
 		// save current track for comparison
-		currentTrack = item.name;
-		currentAlbum = tracks[i].albumName;
+		currentTrack = track.name;
+		currentAlbum = track.albumName;
 		currentReleaseDate = releaseDate;
 	}
 
 	$(`#${track_id}-Napster`).html(html_artwork);
 }
 
-function doSearch(searchTerm, options, limit = 1) {
+function doSearch(searchTerm, options, limit =1) {
 	$.ajax({
 		type: 'GET',
 		//tell API what we want and that we want JSON
@@ -226,7 +229,7 @@ function getTrack(track_id, artist_name, track_name) {
 			//	console.log('errorThrown =' + errorThrown);
 
 			$(`#${track_id}-Lyrics`)
-				.text(`Something went wrong getting track info: ${textStatus}`)
+				.text(`Something went wrong getting lyrics from Musixmatch.com: ${textStatus}`)
 				.addClass('.error-message');
 		},
 		// When AJAX call is complete, will fire upon success OR when error is thrown
@@ -240,7 +243,7 @@ function getNapster(track_id, artist_name, track_name) {
 	const params = {
 		apikey: napsterApiKey,
 		query: artist_name + ' ' + track_name,
-		limit: 10
+		per_type_limit: 10 // maximum number of results to return
 	};
 	const queryString = formatQueryParams(params);
 	const url = napsterURL + '?' + queryString;
@@ -250,7 +253,7 @@ function getNapster(track_id, artist_name, track_name) {
 	/*
 ALTERNATIVE:
 const napsterURL = 'https://api.napster.com/v2.2/search';
-const url = napsterURL + `${artist_name}+${track_name}&limit=10`;
+const url = napsterURL + `${artist_name}+${track_name}&per_type_limit=10`;
 console.log('napsterURL = ' + url);
 */
 
@@ -311,16 +314,16 @@ $('.back-to-top').on('click', function(event) {
 	$('html, body').animate({ scrollTop: 0 }, duration);
 });
 
-// default functions loaded in DOM when page loads
-function watchForm() {
-	// ************************************************
+
+// ************************************************
 	// SEARCH EXAMPLES in placeholder
 	var searchExamples = [
 		'Want some suggestions?',
 		'rolling in the deep',
 		'hotel california',
+		'bad guy',
 		'sting roxanne',
-		'bob marley forever loving jah',
+		'old town road',
 		'jonas sucker',
 		'of an emotional landslide'
 	];
@@ -329,8 +332,11 @@ function watchForm() {
 			'placeholder',
 			searchExamples[searchExamples.push(searchExamples.shift()) - 1]
 		);
-	}, 3000);
-
+	}, 2000);
+	
+	
+// default function loaded in DOM when page loads
+function watchForm() {
 	$('form').on('click', '#js-search', function(event) {
 		event.preventDefault();
 
@@ -349,7 +355,7 @@ function watchForm() {
 			$('html, body').animate({ scrollTop: $('main').offset().top + 10 });
 			$('#results-list').empty();
 			$('#results-list').html(
-				'<div id="loader"><img src="loader.gif" alt="loading..."></div>'
+				'<div id="loader"><img src="img/loader.gif" alt="loading..."></div>'
 			);
 			$('#results').removeClass('hidden');
 			doSearch(searchTerm, options, limit);
