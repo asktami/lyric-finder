@@ -144,11 +144,18 @@ legend {
 }
 
 .music {
-  margin: 10px 10px 0 0;
-  text-align: left;
+  margin: 10px 10px 0 10px;
+  text-align: center;
   /* border: 2px solid red; */
   }
   
+@media all  and (min-width: 768px) /* Tablet & above */ {
+  .music {
+  text-align: left;
+  }
+}
+
+
 .musicAll {
   display: flex;
   flex-direction: row;
@@ -267,7 +274,7 @@ input:focus {
 }
 button {
   border: 3px solid ghostwhite;
-  margin-top: 10px;
+  margin 0 auto;
   padding: 8px 13px;
   color: ghostwhite;
   font-size: 28px;
@@ -277,7 +284,7 @@ button {
   transition: color 0.25s linear;
   text-shadow: 0 0 3px #555555;
   border-radius: 0;
-  width: 300px;
+  width: 250px;
 }
 
 button:hover, button:active, button:focus {
