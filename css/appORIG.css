@@ -60,7 +60,7 @@ footer {
 }
 
 
-h1, h2, h3, h4{
+h1, h2, h3 {
 font-family: 'Raleway', sans-serif;
 }
 
@@ -73,9 +73,6 @@ font-size: 38px;s
 h3 {
 font-size: 26px;
 margin-top: 50px;
-}
-h3 {
-font-size: 18px;
 }
 
 legend {
@@ -108,12 +105,14 @@ legend {
 @media all  and (min-width: 768px) /* Tablet */ {
   .item {
     flex-wrap: nowrap;
+    align-items: flex-start;
   }
 }
 
 @media all and (min-width: 980px) /* Desktop */ {
   .item {
     flex-wrap: nowrap;
+    align-items: flex-start;
   }
 }
 
@@ -128,62 +127,25 @@ legend {
   text-align: left;
   padding: 20px 20px 10px 20px;
   font-size: 17.5px;
-  width: 300px;
+  width: 75%;
   }
 
 @media all  and (min-width: 768px) /* Tablet & iPad Pro */ {
   .lyrics {
-	width: 500px;
+	width: 50%;
   }
 }
 
 @media all and (min-width: 1025px) /* Desktop */ {
   .lyrics{
-	width: 600px;
+	width: 50%;
   }
 }
 
 .music {
   margin: 10px 10px 0 0;
-  text-align: left;
   /* border: 2px solid red; */
   }
-  
-.musicAll {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  background-color: #000;
-  margin: 10px 10px 0 0;
-  padding: 20px 0;
-  text-align: center;
-  width: 350px;
-  /* border: 2px solid orange; */
-  }
-
-
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  align-content: center;
-  flex-wrap: wrap;
-  /* border: 5px solid red; */
-}
-
-@media all  and (min-width: 768px) /* Tablet */ {
-  .row {
-    flex-wrap: nowrap;
-  }
-}
-
-@media all and (min-width: 980px) /* Desktop */ {
-  .row {
-    flex-wrap: nowrap;
-  }
-}
 
 .error-message {
     color: red;
@@ -284,6 +246,7 @@ button:hover, button:active, button:focus {
   color: #533D6D;
   background-color: #fff;
 }
+
 
 @media all  and (min-width: 768px) /* Tablet & iPad Pro & above */ {
   input {

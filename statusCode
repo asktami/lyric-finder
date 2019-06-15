@@ -1,0 +1,27 @@
+
+		statusCode: {
+		  400: function() {
+			alert( "The request had bad syntax or was inherently impossible to be satisfied" );
+		  },
+		  401: function() {
+			alert( "Authentication failed, probably because of invalid/missing API key." );
+		  },
+		  402: function() {
+			alert( "The usage limit has been reached, either you exceeded per day requests limits or your balance is insufficient." );
+		  },
+		  403: function() {
+			alert( "You are not authorized to perform this operation." );
+		  },
+		  404: function() {
+			alert( "The requested resource was not found." );
+		  },
+		  405: function() {
+			alert( "The requested method was not found." );
+		  },
+		  500: function() {
+			alert( "Ops. Something were wrong." );
+		  },
+		  503: function() {
+			alert( "Our system is a bit busy at the moment and your request can’t be satisfied." );
+		  }
+		},
