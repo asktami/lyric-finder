@@ -267,6 +267,7 @@ input:focus {
 }
 button {
   border: 3px solid ghostwhite;
+  margin-top: 10px;
   padding: 8px 13px;
   color: ghostwhite;
   font-size: 28px;
@@ -275,9 +276,8 @@ button {
   background: rgba(255, 255, 255, 0.25);
   transition: color 0.25s linear;
   text-shadow: 0 0 3px #555555;
-  position: relative;
-  left: -3px;
   border-radius: 0;
+  width: 300px;
 }
 
 button:hover, button:active, button:focus {
@@ -304,6 +304,17 @@ button:hover, button:active, button:focus {
 }
 
 
+#js-max-results {
+  border: none;
+  border-radius: 0px;
+  text-align: center;
+  padding: 10px;
+  -webkit-font-smoothing: antialiased;
+  font-size: 18px;
+  background: none;
+  width: 75px;
+}
+
 header {
    background:
     linear-gradient(
@@ -328,7 +339,7 @@ header {
   .header_content {
     position: relative;
     transform: translate(0px, -50%);
-    top: 20%;
+    top: 40%;
   }
 }
 
