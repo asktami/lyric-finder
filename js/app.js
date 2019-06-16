@@ -167,11 +167,11 @@ function formatNapsterAllResults(data, searchTerm) {
 			  currentReleaseDate = releaseDate;
 		  }
 	   } else {
-		   html_output += '<div data-track-id="${track.id}">Nothing found.</div>';
+		   html_output += 'Nothing found.';
 	   }
 	}
 
-	console.log('******* #NapsterAll = ' + html_output);
+	// console.log('******* #NapsterAll = ' + html_output);
 	$('#NapsterAll').append(html_output);
 }
 
@@ -252,8 +252,10 @@ function formatNapsterResults(data, track_id, track_name) {
 }
 
 function doSearch(searchTerm, options, limit=10) {
-
-	let ajaxData = {
+	$.ajax({
+		type: 'GET',
+		//tell API what we want and that we want JSON
+		data: {
 			apikey: musixMatchApiKey,
 			q: searchTerm,
 			page_size: limit,
@@ -261,28 +263,58 @@ function doSearch(searchTerm, options, limit=10) {
 			s_artist_rating: 'desc',
 			s_track_rating: 'desc',
 			format: 'jsonp'
-		};
-	
-	$.ajax({
-		type: 'GET',
-		//tell API what we want and that we want JSON
-		data: ajaxData,
+		},
 		url: searchURL,
 		// console.log the constructed url
 		beforeSend: function(jqXHR, settings) {
-			//	console.log('searchURL = ' + settings.url);
+			console.log('searchURL = ' + settings.url);
 		},
 		//tell jQuery to expect JSONP
 		dataType: 'jsonp',
 		//work with the response
 		success: function(data) {
+		
+			// remove loader
+			$('#results-list').empty();
+			
+			// b/c jsonp handle different statusCodes this way:
+			switch(data.message.header.status_code){
+			case 400: 
+			$('#js-error-message').html( "The request had bad syntax or was inherently impossible to be satisfied" );
+			break;
+		  case 401:
+			$('#js-error-message').html( "Authentication failed, probably because of invalid/missing API key." );
+			break;
+		  case 402:
+			$('#js-error-message').html( "The usage limit has been reached, either you exceeded per day requests limits or your balance is insufficient." );
+			break;
+		  case 403: 
+			$('#js-error-message').html( "You are not authorized to perform this operation." );
+			break;
+		  case 404: 
+			$('#js-error-message').html( "The requested resource was not found." );
+			break;
+		  case 405:
+			$('#js-error-message').html( "The requested method was not found." );
+			break;
+		  case 500: 
+			$('#js-error-message').html( "Ops. Something went wrong." );
+			break;
+		  case 503: 
+			$('#js-error-message').html( "Our system is a bit busy at the moment and your request can’t be satisfied." );
+			break;
+		  
+		  // if no errors then format data
+		   default:
 			formatSearchResults(data);
+		  }
 		},
 		//work with any error
 		error: function(jqXHR, textStatus, errorThrown) {
-			//	console.log('jqXHR JSON.stringify = ' + JSON.stringify(jqXHR));
-			//	console.log('textStatus =' + textStatus);
-			//	console.log('errorThrown =' + errorThrown);
+				alert('got to ERROR');
+				console.log('jqXHR JSON.stringify = ' + JSON.stringify(jqXHR));
+				console.log('textStatus =' + textStatus);
+				console.log('errorThrown =' + errorThrown);
 
 			$('#js-error-message').text(`Something went wrong doing artist/song title search: ${textStatus}`);
 		},
@@ -351,9 +383,9 @@ console.log('napsterURL = ' + url);
 			if (response.ok) {
 				return response.json();
 			}
-			response.json().then(err => {
+			 response.json().then(err => {
 				throw new Error(err);
-			});
+			 });
 		})
 		.then(data => formatNapsterAllResults(data, searchTerm))
 		.catch(err => {
@@ -384,9 +416,9 @@ console.log('napsterURL = ' + url);
 			if (response.ok) {
 				return response.json();
 			}
-			response.json().then(err => {
+			// response.json().then(err => {
 				throw new Error(err);
-			});
+			// });
 		})
 		.then(data => {
 			console.log('NAPSTER data = ' + JSON.stringify(data));
@@ -454,9 +486,7 @@ function watchForm() {
 			$('input#js-search-term').blur();
 			$('html, body').animate({ scrollTop: $('main').offset().top + 20 });
 			$('#results-list').empty();
-			$('#results-list').html(
-				'<div id="loader"><img src="img/loader.gif" alt="loading..."></div>'
-			);
+			$('#results-list').html('<img src="img/loader.gif" alt="loading...">');
 			$('#results').removeClass('hidden');
 			
 			doSearch(searchTerm, options, limit);
