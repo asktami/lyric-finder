@@ -260,7 +260,6 @@ function doSearch(searchTerm, options, limit=10) {
 			q: searchTerm,
 			page_size: limit,
 			page: 1,
-			s_artist_rating: 'desc',
 			s_track_rating: 'desc',
 			format: 'jsonp'
 		},
