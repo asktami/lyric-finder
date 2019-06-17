@@ -474,7 +474,6 @@ function watchForm() {
 		event.preventDefault();
 
 		const searchTerm = $('#js-search-term').val();
-		const limit = $('#js-max-results').val();
 
 		//check for empty input
 		if (searchTerm === '') {
@@ -489,7 +488,7 @@ function watchForm() {
 			$('#results-list').html('<img src="img/loader.gif" alt="loading...">');
 			$('#results').removeClass('hidden');
 			
-			doSearch(searchTerm, options, limit);
+			doSearch(searchTerm, options);
 			getNapsterAll(searchTerm);
 		}
 	});

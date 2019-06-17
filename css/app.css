@@ -267,16 +267,6 @@
          margin-left: 3px;
     }
 }
- #js-max-results {
-     border: none;
-     border-radius: 0px;
-     text-align: center;
-     padding: 10px;
-     -webkit-font-smoothing: antialiased;
-     font-size: 18px;
-     background: none;
-     width: 75px;
-}
  header {
      background: linear-gradient( to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7) ), url(../img/matt-botsford-197870-unsplash.jpg);
      background-size: cover;
