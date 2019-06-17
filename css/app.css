@@ -155,20 +155,18 @@ legend {
   }
 }
 
-
 .musicAll {
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex-wrap: wrap;
+  align-items: center;
   background-color: #000;
   margin: 10px 10px 0 0;
   padding: 20px 0;
-  text-align: center;
   width: 350px;
   /* border: 2px solid orange; */
   }
-
 
 .row {
   display: flex;
@@ -180,13 +178,7 @@ legend {
   /* border: 5px solid red; */
 }
 
-@media all  and (min-width: 768px) /* Tablet */ {
-  .row {
-    flex-wrap: nowrap;
-  }
-}
-
-@media all and (min-width: 980px) /* Desktop */ {
+@media all  and (min-width: 768px) /* Tablet and Above */ {
   .row {
     flex-wrap: nowrap;
   }
