@@ -1,13 +1,22 @@
-# lyric-finder-api-capstone
+# Lyric Finder
+
+![https://github.com/asktami/lyric-finder-api-capstone/blob/master/app-images/pwa-512x512.png]
+
 [View Live](https://asktami.github.io/lyric-finder-api-capstone/)
 
 Help users find song lyrics and listen to a sample.
 
-Search for a song via Artist or Title or Words in the Song (or any combination) and get lyrics from MusixMatch and sound samples from Napster.
+Search for lyrics using artist or song title or some words from a song (or any combination) and get lyrics from MusixMatch and sound samples from Napster.
 
 APIs:
-- MusixMatch (Endpoints: track.search, track.lyrics.get)
+- MusixMatch API (Endpoints: track.search, track.lyrics.get)
 - Napster API
+
+Other technologies:
+- HTML5
+- CSS
+- Javascript
+- jQuery
 
 
 Requirements:
