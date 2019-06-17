@@ -1,6 +1,6 @@
 # Lyric Finder
 
-![https://github.com/asktami/lyric-finder-api-capstone/blob/master/app-images/pwa-512x512.png]
+![Lyric Finder screenshot](https://github.com/asktami/lyric-finder-api-capstone/blob/master/app-images/pwa-512x512.png?raw=true "Lyric Finder")
 
 [View Live](https://asktami.github.io/lyric-finder-api-capstone/)
 
