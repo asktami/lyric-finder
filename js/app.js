@@ -431,12 +431,11 @@ console.log('napsterURL = ' + url);
 		});
 }
 
-// display placeholder in field, scroll up to search form, and focus on input field
+// display search placeholder in input field, scroll up to search form, focus on input field, empty & hide results, empty errors
 function resetForm() {
 	$('#js-form')[0].reset();
-	$('input#js-search-term').attr('placeholder', 'Artist, Song or Lyrics...');
+	$('#js-search-term').attr('placeholder', 'Artist, Song or Lyrics...');
 	$('html, body').animate({ scrollTop: $('header').offset().top });
-	$('input#js-search-term').focus();
 
 	// clear errors
 	$('#js-error-message').empty();
@@ -446,9 +445,10 @@ function resetForm() {
 
 	//hide the results section
 	$('#results').addClass('hidden');
+	
+	// focus on input field
+	$('#js-search-term').focus();
 
-	// focus on searchTerm
-	$('.js-search-term').focus();
 }
 
 // ************************************************
@@ -465,6 +465,8 @@ $(window).scroll(function() {
 $('.back-to-top').on('click', function(event) {
 	event.preventDefault();
 	$('html, body').animate({ scrollTop: 0 }, duration);
+	// select contents of input field
+	$('#js-search-term').select();
 });
 
 	
@@ -483,7 +485,6 @@ function watchForm() {
 			resetForm();
 			// if input is valid, display loading graphic, empty result div, scroll to results, and run ajax & fetch calls to Musixmatch and Napster APIs*/
 		} else {
-			$('input#js-search-term').blur();
 			$('html, body').animate({ scrollTop: $('main').offset().top + 20 });
 			$('#results-list').empty();
 			$('#results-list').html('<img src="img/loader.gif" alt="loading...">');
@@ -509,7 +510,7 @@ function watchForm() {
 		'of an emotional landslide'
 	];
 	setInterval(function() {
-		$('input#js-search-term').attr(
+		$('#js-search-term').attr(
 			'placeholder',
 			searchExamples[searchExamples.push(searchExamples.shift()) - 1]
 		);
