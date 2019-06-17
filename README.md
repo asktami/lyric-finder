@@ -8,18 +8,17 @@ Help users find song lyrics and listen to a sample.
 
 Search for lyrics using artist or song title or some words from a song (or any combination) and get lyrics from MusixMatch and sound samples from Napster.
 
-APIs:
+##APIs:
 - MusixMatch API (Endpoints: track.search, track.lyrics.get)
 - Napster API
 
-Other technologies:
+##Other technologies:
 - HTML5
 - CSS
 - Javascript
 - jQuery
 
-
-Requirements:
+##Requirements:
 - do something interesting
 - look good
 - be accessible
