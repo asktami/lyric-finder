@@ -267,7 +267,7 @@ function doSearch(searchTerm, options, limit=10) {
 		url: searchURL,
 		// console.log the constructed url
 		beforeSend: function(jqXHR, settings) {
-			console.log('searchURL = ' + settings.url);
+			// console.log('searchURL = ' + settings.url);
 		},
 		//tell jQuery to expect JSONP
 		dataType: 'jsonp',
@@ -369,7 +369,7 @@ function getNapsterAll(searchTerm) {
 	};
 	const queryString = formatQueryParams(params);
 	const url = napsterURL + '?' + queryString;
-	console.log('napsterURL = ' + url);
+	// console.log('napsterURL = ' + url);
 
 /*
 ALTERNATIVE:
@@ -402,7 +402,7 @@ function getNapster(track_id, artist_name, track_name) {
 	};
 	const queryString = formatQueryParams(params);
 	const url = napsterURL + '?' + queryString;
-	console.log('napsterURL = ' + url);
+	// console.log('napsterURL = ' + url);
 
 /*
 ALTERNATIVE:
@@ -421,7 +421,7 @@ console.log('napsterURL = ' + url);
 			// });
 		})
 		.then(data => {
-			console.log('NAPSTER data = ' + JSON.stringify(data));
+			// console.log('NAPSTER data = ' + JSON.stringify(data));
 			formatNapsterResults(data, track_id, track_name);
 		})
 		.catch(err => {
