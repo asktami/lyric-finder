@@ -279,13 +279,14 @@ function doSearch(searchTerm, options, limit=10) {
 			// b/c jsonp handle different statusCodes this way:
 			switch(data.message.header.status_code){
 			case 400: 
-			$('#js-error-message').html( "The request had bad syntax or was inherently impossible to be satisfied" );
+			$('#js-error-message').html( "The request had bad syntax or was inherently impossible to be satisfied." );
 			break;
 		  case 401:
-			$('#js-error-message').html( "Authentication failed, probably because of invalid/missing API key." );
+		  // getting 401 error instead of 402 when usage limit exceeded
+			$('#js-error-message').html( "The usage limit has been reached, either you exceeded per day requests limits or your balance is insufficient. Please try again tomorrow." );
 			break;
 		  case 402:
-			$('#js-error-message').html( "The usage limit has been reached, either you exceeded per day requests limits or your balance is insufficient." );
+			$('#js-error-message').html( "The usage limit has been reached, either you exceeded per day requests limits or your balance is insufficient. Please try again tomorrow." );
 			break;
 		  case 403: 
 			$('#js-error-message').html( "You are not authorized to perform this operation." );
@@ -297,10 +298,10 @@ function doSearch(searchTerm, options, limit=10) {
 			$('#js-error-message').html( "The requested method was not found." );
 			break;
 		  case 500: 
-			$('#js-error-message').html( "Ops. Something went wrong." );
+			$('#js-error-message').html( "Ops. Something went wrong. Please try again." );
 			break;
 		  case 503: 
-			$('#js-error-message').html( "Our system is a bit busy at the moment and your request can’t be satisfied." );
+			$('#js-error-message').html( "Our system is a bit busy at the moment and your request can’t be satisfied. Please try again later." );
 			break;
 		  
 		  // if no errors then format data
@@ -495,7 +496,6 @@ function watchForm() {
 }
 
 // default functions loaded in DOM when page loads:
-
 //	1.  show search examples in placeholder
 	const searchExamples = [
 		'Want some suggestions?',
