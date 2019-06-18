@@ -50,7 +50,10 @@ for this combination of artist and song title.</div>
 			let track_id = item.track_id;
 
 			getTrack(item.track_id, item.artist_name, item.track_name);
-			getNapster(item.track_id, item.artist_name, item.track_name);
+			
+			if(item.track_id !== undefined &&  item.artist_name !== undefined && item.track_name !== undefined ){
+				getNapster(item.track_id, item.artist_name, item.track_name);
+			}
 
 			$('#results-list').append(`<li><h3>${item.track_name}</h3>
 			Artist: ${item.artist_name}
